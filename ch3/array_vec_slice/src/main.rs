@@ -71,4 +71,43 @@ fn main() {
     assert_eq!(v.pop(), Some("Glass Gem"));
     assert_eq!(v.pop(), Some("Snow Puff"));
     assert_eq!(v.pop(), None);
+
+    // You can use a for loop to iterator over a vector
+    let languages: Vec<String> = std::env::args().skip(1).collect();
+    for l in languages {
+        println!(
+            "{}: {}",
+            l,
+            if l.len() % 2 == 0 {
+                "functional"
+            } else {
+                "imperative"
+            }
+        );
+    }
+
+    // A slice [T] is a region of an array or vector. Slices can be any length,
+    // slices can't be stored directly in variables or passed as function args.
+    // Slices are always passed as references.
+    let v: Vec<f64> = vec![0.0, 0.707, 1.0, 0.707];
+    let a: [f64; 4] = [0.0, -0.707, -1.0, -0.707];
+
+    let sv: &[f64] = &v;
+    let sa: &[f64] = &a;
+
+    // Print a slice of numbers, one per line
+    fn print(n: &[f64]) {
+        for elt in n {
+            println!("{}", elt);
+        }
+    }
+
+    // Works on arrays and vectors
+    print(&a);
+    print(&v);
+
+    print(&v[0..2]);
+    print(&a[2..]);
+    print(&sv[1..3]);
+    print(&sa[3..]);
 }
