@@ -63,4 +63,12 @@ fn main() {
     v.remove(1);
     assert_eq!(v, [10, 30, 35, 40, 50]);
     println!("{:?}", v);
+
+    // pop method removes last element and returns it. Technically,
+    // an Option<T> is returned. None if vector is empty, or Some(v)
+    // if the element had been v:
+    let mut v = vec!["Snow Puff", "Glass Gem"];
+    assert_eq!(v.pop(), Some("Glass Gem"));
+    assert_eq!(v.pop(), Some("Snow Puff"));
+    assert_eq!(v.pop(), None);
 }
