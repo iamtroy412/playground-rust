@@ -32,4 +32,24 @@ fn main() {
     // Unicode text.
     let method = b"GET";
     assert_eq!(method, &[b'G', b'E', b'T']);
+
+    // The to_string() method converts a &str to a String.
+    let error_message = "too many pets".to_string();
+
+    // The format!() macro works like println!() except it doesn't
+    // print to stdout, it creates a String without the newline.
+    assert_eq!(
+        format!("{}d{:02}'{:02}'N", 24, 5, 23),
+        "24d05'23'N".to_string()
+    );
+
+    // Arrays, slices, and vectors of string have two methods.
+    // concat() and join(sep) that form new a new Sting
+    let bits = vec!["veni", "vidi", "vici"];
+    assert_eq!(bits.concat(), "venividivici");
+    assert_eq!(bits.join(", "), "veni, vidi, vici");
+
+    // Strings support == and != operators. Two strings are equal if they
+    // contain the same characters in the same order.
+    assert!("ONE".to_lowercase() == "one");
 }
