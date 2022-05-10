@@ -62,4 +62,21 @@ fn main() {
     // What's left in the vector?
     assert_eq!(v, vec!["101", "104", "substitute"]);
     println!("{:?}", v);
+
+    // By default, user defined types like this struct are not copy(),
+    // so calling print(l) would move ownership and the next println!()
+    // would fail to compile. Using the below derive statement, we can
+    // say that our struct has copy() and the below code compiles.
+    #[derive(Copy, Clone)]
+    struct Label {
+        number: u32,
+    }
+
+    fn print(l: Label) {
+        println!("STAMP: {}", l.number);
+    }
+
+    let l = Label { number: 42 };
+    print(l);
+    println!("My label number is: {}", l.number);
 }
