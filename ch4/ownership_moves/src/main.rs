@@ -67,6 +67,8 @@ fn main() {
     // so calling print(l) would move ownership and the next println!()
     // would fail to compile. Using the below derive statement, we can
     // say that our struct has copy() and the below code compiles.
+    // Note that this only works if your struct contains all types that
+    // support copy()
     #[derive(Copy, Clone)]
     struct Label {
         number: u32,
