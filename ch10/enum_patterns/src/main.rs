@@ -93,4 +93,24 @@ fn main() {
 
     assert_eq!("somewhere else", describe_point(-100, -42));
     println!("{}", describe_point(42, 42));
+
+    // Slice patterns are similar to arrays, but unlike arrays, slices have
+    // variable lengths, so slice patterns not only match values, but also
+    // length.
+    fn greet_people(names: &[&str]) {
+        match names {
+            [] => {
+                println!("Hello, nobody!")
+            }
+            [a] => {
+                println!("Hello, {}.", a)
+            }
+            [a, b] => {
+                println!("Hello, {} and {}.", a, b)
+            }
+            [a, .., b] => {
+                println!("Hello, everyone from {} to {}.", a, b)
+            }
+        }
+    }
 }
