@@ -76,4 +76,21 @@ fn main() {
         "{}",
         rough_time_to_english(RoughTime::InTheFuture(TimeUnit::Months, 2))
     );
+
+    // Tuple patterns match tuples. They're useful any time you want to get multiple
+    // pieces of data involved in a single match
+    fn describe_point(x: i32, y: i32) -> &'static str {
+        use std::cmp::Ordering::*;
+        match (x.cmp(&0), y.cmp(&0)) {
+            (Equal, Equal) => "at the origin",
+            (_, Equal) => "on the x axis",
+            (Equal, _) => "on the y axis",
+            (Greater, Greater) => "in the first quadrant",
+            (Less, Greater) => "in the second quadrant",
+            _ => "somewhere else",
+        }
+    }
+
+    assert_eq!("somewhere else", describe_point(-100, -42));
+    println!("{}", describe_point(42, 42));
 }
