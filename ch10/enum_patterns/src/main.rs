@@ -148,7 +148,22 @@ fn main() {
         }
     }
 
+    impl<T: Clone> BinaryTree<T> {
+        fn walk(&self) -> Vec<T> {
+            match *self {
+                BinaryTree::Empty => vec![],
+                BinaryTree::NonEmpty(ref boxed) => {
+                    let mut result = boxed.left.walk();
+                    result.push(boxed.element.clone());
+                    result.extend(boxed.right.walk());
+                    result
+                }
+            }
+        }
+    }
+
     let mut tree = BinaryTree::Empty;
     tree.add("Mercury");
     tree.add("Venus");
+    println!("{:?}", tree.walk());
 }
