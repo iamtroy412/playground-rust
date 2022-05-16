@@ -20,8 +20,8 @@ fn main() {
     assert_eq!(*s.r, 10);
 }
 
-struct S {
-    r: &i32,
+struct S<'a> {
+    r: &'a i32,
 }
 
 static mut STASH: &i32 = &42;
