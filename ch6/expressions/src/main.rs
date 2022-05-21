@@ -252,4 +252,26 @@ fn main() {
     let ramp = (0..n).collect::<Vec<i32>>(); // ok, using ::<
 
     // The ::<..> symbol is know as turbofish in the Rust community
+
+    // If the value to the left of the dot is a reference or smart pointer type,
+    // it's automatically dereferenced.
+    game.black_pawns; // struct field
+    coords.1; // tuple element
+
+    // The value to the left of the brackets is automatically dereferenced.
+    pieces[i]; // array element
+
+    // Extracting a slice from an array or vector is straightforward
+    let second_half = &game_moves[midpoint..end];
+
+    // The .. operator allows for either operand to be omitted.
+    .. // RangeFull
+    a .. // RangeFrom { start: a }
+    .. b // RangeTo { end: b }
+    a .. b // Range { start: a, end: b }
+
+    // The ..= operator produces end-inclusive ranges, which do include
+    // the end value.
+    ..= b // RangeToInclusive{ end: b }
+    a ..= b // RangeInclusive::new(a, b)
 }
