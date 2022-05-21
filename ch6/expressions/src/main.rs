@@ -43,4 +43,46 @@ fn main() {
         // return value stored in 'msg'.
         dandelion_control.get_status()
     };
+
+    // A let declaration can declare a variable with initializing it.
+    // The variable can be initialized in a later assignment.
+    // Can be usefule because sometimes the variable should be
+    // initialized from some sort of control flow. Eithe way it will
+    // only be initialized exactly once, so name does not need to
+    // be declared as mut.
+    let name;
+    if user.has_nickname() {
+        name = user.nickname();
+    } else {
+        name = generate_unique_name();
+        user.register(&name);
+    }
+
+    // There is one more if form, the if let expression:
+    if let pattern = expr {
+        block1
+    } else {
+        block2
+    }
+
+    // The given expr either matches the pattern and block1 runs,
+    // or it doesn't match and block2 runs. Sometimes this is a nice
+    // way to get data out of an Option or Result:
+    if let Some(cookie) = request.session_cookie {
+        return restore_session(cookie);
+    }
+
+    if let Err(err) = show_cheesy_anti_robot_talk() {
+        log_robot_attempt(err);
+        politely_accuse_user_of_being_a_robot();
+    } else {
+        session.mark_as_human();
+    }
+
+    // An if let expression is shorthand for a match with just
+    // one pattern:
+    match expr {
+        pattern => block1,
+        _ => block2,
+    }
 }
