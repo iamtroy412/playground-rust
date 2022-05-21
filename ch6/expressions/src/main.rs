@@ -211,4 +211,17 @@ fn main() {
         Ok(v) => v,
         Err(err) => return Err(err),
     };
+
+    // Expressions that don't return normally are assigned a special type of
+    // ! and they're exempt from the rules about types having to match.
+    // The ! means that for example std::process::exit() never returns.
+    // It's a divergent function.
+    // Rust then considers it an error if the function returns normally
+    fn serve_forever(socket: ServerSocket, handler: ServerHandler) -> ! {
+        socket.listen();
+        loop {
+            let s = socket.accept();
+            handler.handle(s);
+        }
+    }
 }
