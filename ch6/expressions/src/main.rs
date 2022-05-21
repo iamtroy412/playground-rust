@@ -188,4 +188,27 @@ fn main() {
         }
     };
     // Labels can also be used with continue.
+
+    // A return expression exits the current function, returning a value
+    // to the caller.
+    // return without a value is shorthand for return ()
+    fn f() {
+        // return type omitted: defaults to ()
+        return; // return value omitted: defaults to ()
+    }
+
+    // A function doesn't have to have an explicit return expression.
+    // The body of a function works like the block expression: if the last
+    // expression isn't followed by a semicolon, its value is the functions
+    // return value.
+    // You can make a direct call to return early in the function if needed
+    // for example remember the function()?; syntaxt is short for a match
+    // expression that returns a Result. Either Ok, or Err(v).
+    let output = File::create(filename)?;
+
+    // The above is short for
+    let output = match File::create(filename) {
+        Ok(v) => v,
+        Err(err) => return Err(err),
+    };
 }
