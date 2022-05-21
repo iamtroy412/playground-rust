@@ -224,4 +224,32 @@ fn main() {
             handler.handle(s);
         }
     }
+
+    // Function and Method Calls
+    // In the second example here, player is a variable of the made-up type Player
+    // which has a made-up .location() method.
+    let x = gcd(1302, 462); // function call
+    let room = player.location(); // method call
+
+    // The following syntax is used for calling type-associated functions
+    let mut numbers = Vec::new(); // type-associated function call
+
+    // Ordinary methods are called on values (like my_vec.len()), and
+    // type-associated functions are called on types (like Vec::new())
+
+    // Method calls can be chained
+    // From the actix-based web server example in ch2
+    server
+        .bind("127.0.0.1:3000")
+        .expect("error binding server to address")
+        .run()
+        .expect("error running server");
+
+    // In expressions, < is the less-than operator, so when making function or
+    // method calls with generic types, you need the following syntax, becase
+    // Vec<T> for example does not work.
+    return Vec::<i32>::with_capacity(1000); // ok, using ::<
+    let ramp = (0..n).collect::<Vec<i32>>(); // ok, using ::<
+
+    // The ::<..> symbol is know as turbofish in the Rust community
 }
